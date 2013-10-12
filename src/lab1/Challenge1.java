@@ -26,9 +26,9 @@ public class Challenge1 {
         String msg = "Your last name is: " + lastName;
         JOptionPane.showMessageDialog(null, msg);
     }
-    
     public String extractLastName(String fullName) {
-        String[] nameParts = fullName.split(" ");
+             String[] nameParts = fullName.split(" ");
+        
         return nameParts[LAST_NAME_IDX];
     }
 

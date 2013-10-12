@@ -25,7 +25,11 @@ public class Employee {
     private String ssn;
     private Date hireDate;
     private int daysVacation;
-
+    private String DAYS_VACATION_ERROR = "Days of vacation must be 0 or above.";
+    private String FIRST_NAME_ERROR = "First Name is less than 1 character.";
+    private String HIRE_DATE_ERROR = "Hire date is not a date.";
+    private String LAST_NAME_ERROR = "Last Name is less than 1 character.";
+    private String SSN_ERROR = "SSN must be the format of XXX-XX-XXXX";
     public Employee() {
         firstName = "Unknown";
         lastName = "Unknown";
@@ -39,7 +43,7 @@ public class Employee {
         this.lastName = lastName;
         this.ssn = ssn;
         this.hireDate = hireDate;
-        this.daysVacation = daysVacation;
+        setDaysVacation(daysVacation);
     }
     
     public int getDaysVacation() {
@@ -47,7 +51,9 @@ public class Employee {
     }
 
     public void setDaysVacation(int daysVacation) {
-        this.daysVacation = daysVacation;
+        if(daysVacation < 0){
+            throw new IllegalArgumentException(DAYS_VACATION_ERROR);
+        }else this.daysVacation = daysVacation;
     }
 
     public String getFirstName() {
@@ -55,7 +61,10 @@ public class Employee {
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        if(firstName == null || firstName.length() < 1){
+            throw new IllegalArgumentException(FIRST_NAME_ERROR);
+        } else this.firstName = firstName;
+        
     }
 
     public Date getHireDate() {
@@ -63,7 +72,9 @@ public class Employee {
     }
 
     public void setHireDate(Date hireDate) {
-        this.hireDate = hireDate;
+        if(hireDate == null){
+            throw new IllegalArgumentException(HIRE_DATE_ERROR);
+        }else this.hireDate = hireDate;
     }
 
     public String getLastName() {
@@ -71,7 +82,9 @@ public class Employee {
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        if(lastName == null || lastName.length() < 1){
+            throw new IllegalArgumentException(LAST_NAME_ERROR);
+        } else this.lastName = lastName;
     }
 
     public final String getSsn() {
@@ -79,7 +92,9 @@ public class Employee {
     }
 
     public void setSsn(String ssn) {
-        this.ssn = ssn;
+        if(ssn == null || ssn.length() != 11){
+            throw new IllegalArgumentException(SSN_ERROR);
+        } else this.ssn = ssn;
     }
     
     
