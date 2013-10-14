@@ -17,18 +17,33 @@ import javax.swing.JOptionPane;
  */
 public class Challenge1 {
     private static final int LAST_NAME_IDX = 1;
+    private static final String NO_NAME = "No name is provied, please provide a valid name.";
+    private static final String NO_SPACE = "You must have a space between your first and last name.";
 
-    public static void main(String[] args) {
-        Challenge1 app = new Challenge1();
-        
-        String fullName = JOptionPane.showInputDialog("Enter full name:");
-        String lastName = app.extractLastName(fullName);
-        String msg = "Your last name is: " + lastName;
-        JOptionPane.showMessageDialog(null, msg);
+    public static void main(String[] args) throws InterruptedException {
+        displayName();
     }
-    public String extractLastName(String fullName) {
-             String[] nameParts = fullName.split(" ");
-        
+    
+    public static void displayName() {
+         try {
+               String fullName = JOptionPane.showInputDialog("Enter full name:");
+               String lastName = Challenge1.extractLastName(fullName);
+               String msg = "Your last name is: " + lastName;
+               JOptionPane.showMessageDialog(null, msg);
+          } catch (IllegalArgumentException ie) {
+               JOptionPane.showMessageDialog(null, ie.getMessage());
+               displayName();
+          }   
+    }
+    
+    public static String extractLastName(String fullName)
+            throws IllegalArgumentException {
+        if (fullName == null || fullName.length() == 0) {
+            throw new IllegalArgumentException(NO_NAME);
+        } else if (!(fullName.contains(" "))) {
+            throw new IllegalArgumentException(NO_SPACE);
+        }
+        String[] nameParts = fullName.split(" ");
         return nameParts[LAST_NAME_IDX];
     }
 
