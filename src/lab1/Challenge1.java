@@ -19,14 +19,15 @@ public class Challenge1 {
     private static final int LAST_NAME_IDX = 1;
     private static final String NO_NAME = "No name is provied, please provide a valid name.";
     private static final String NO_SPACE = "You must have a space between your first and last name.";
-
+    private static final String INPUT_TEXT = "Enter Full Name: ";
+    private static final String CONTAINS = " ";
     public static void main(String[] args) throws InterruptedException {
         displayName();
     }
     
     public static void displayName() {
          try {
-               String fullName = JOptionPane.showInputDialog("Enter full name:");
+               String fullName = JOptionPane.showInputDialog(INPUT_TEXT);
                String lastName = Challenge1.extractLastName(fullName);
                String msg = "Your last name is: " + lastName;
                JOptionPane.showMessageDialog(null, msg);
@@ -40,7 +41,7 @@ public class Challenge1 {
             throws IllegalArgumentException {
         if (fullName == null || fullName.length() == 0) {
             throw new IllegalArgumentException(NO_NAME);
-        } else if (!(fullName.contains(" "))) {
+        } else if (!(fullName.contains(CONTAINS))) {
             throw new IllegalArgumentException(NO_SPACE);
         }
         String[] nameParts = fullName.split(" ");

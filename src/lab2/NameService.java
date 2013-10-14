@@ -10,7 +10,8 @@ package lab2;
 public class NameService {
     private static final int FIRST_NAME_IDX = 0;
     private static final int LAST_NAME_IDX = 1;
-    
+    private static final String FULL_NAME_ERROR = "Full name is required.";
+    private static final String MISSING_SPACE = "There is no space in the name.";
     /**
      * Finds and returns the last name from within a full name. Caution: 
      * No validation is performed.
@@ -18,9 +19,16 @@ public class NameService {
      * @param fullName - a name containing a first name and a last name
      * @return the last name
      */
-    public String extractLastName(String fullName) {
+    public String extractLastName(String fullName) throws IllegalArgumentException{
+        if (fullName == null || fullName.length() < 1){
+            throw new IllegalArgumentException(FULL_NAME_ERROR);
+        } else if(!(fullName.contains(" "))){
+            throw new IllegalArgumentException(MISSING_SPACE);
+        }
         String[] nameParts = fullName.split(" ");
         return nameParts[LAST_NAME_IDX];
+        
+            
     }
     
     /**
